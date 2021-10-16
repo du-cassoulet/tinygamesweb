@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tiny Games</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;900&display=swap");
+      *{
+        font-family:"Source Sans Pro";
+        font-weight:300;
+        margin:0;
+        color:#f2f2f2;
+        z-index:1;
+      }
+      body{
+        background:#282a36;
+      }
+      .bold{
+        font-weight:900;
+      }
+      .head{
+        background:#414558;
+        position:absolute;
+        top:60px;
+        width:100%;
+        height:500px;
+        text-align:center;
+      }
+      .head img{
+        width:200px;
+        border-radius:50%;
+        box-shadow:#282a36 0 0 50px;
+        margin:30px;
+      }
+      .head .text{
+        position:absolute;
+        bottom:100px;
+        width:100%;
+      }
+      .head .text h1{
+        color:#bd93f9;
+        font-weight:900;
+        font-size:50px;
+        position:relative;
+      }
+      .head .text p{
+        font-size:20px;
+      }
+      .navbar{
+        box-shadow:#282a36 0 0 100px;
+        position:fixed;
+        z-index:999;
+        padding:5px;
+        width:100%;
+        height:60px;
+        background:#282a36;
+      }
+      .navbar .name{
+        position:absolute;
+        font-weight:900;
+        font-size:25px;
+        bottom:20px;
+        left:20px;
+        cursor:pointer;
+        transition:.5s;
+        text-decoration:none;
+      }
+      .navbar .selector{
+        font-size:25px;
+        right:20px;
+        position:absolute;
+        display:flex;
+        flex-direction:row;
+      }
+      .navbar .selector a{
+        padding:10px;
+        margin-right:10px;
+        bottom:20px;
+        cursor:pointer;
+        transition:.5s;
+      }
+      .navbar .selector a:hover{
+        color:#bd93f9;
+        text-decoration:underline;
+      }
+      .navbar .selector button{
+        font-size:20px;
+        background:#bd93f9;
+        border-radius:5px;
+        margin:5px;
+        padding:10px;
+        bottom:5px;
+        top:5px;
+        color:#282a36;
+        border:none;
+        cursor:pointer;
+      }
+      .navbar .name:hover{
+        color:#bd93f9;
+      }
+      .content{
+        position:absolute;
+        top:560px;
+        width:100%;
+      }
+      .category{
+        width:100%;
+        text-align:center;
+        margin:50px 0;
+      }
+      .cat-title{
+        font-weight:900;
+        position:relative;
+        left:50%;
+        transform:translateX(-50%);
+        color:#bd93f9;
+        margin-bottom:20px;
+      }
+      p a{
+        color:#bd93f9;
+      }
+      .commands{
+        margin:0 100px;
+        font-size:20px;
+      }
+      .commands tr,th,td{
+        padding:10px;
+        border:1px solid #44475a88;
+        text-align:center;
+        margin:0;
+        color:#f8f8f288;
+        transition:.2s;
+        user-select:none;
+      }
+      tr,th,td:hover{
+        border:1px solid #44475aff;
+        color:#f8f8f2ff;
+      }
+    </style>
+    <script>
+      function smoothScroll(target,duration){
+        var target=document.getElementById(target);
+        var targetPosition=target.getBoundingClientRect().top;
+        var startPosition=window.pageYOffset;
+        var distance=targetPosition-startPosition;
+        startTime=null;
+        function animation(currentTime){
+          if(startTime==null)startTime=currentTime;
+          var timeElapsed=currentTime-startTime;
+          var run=ease(timeElapsed,startPosition,distance,duration);
+          window.scrollTo(0,run);
+          if(timeElapsed<duration)requestAnimationFrame(animation);
+        };
+        function ease(t,b,c,d){
+          t/=d/2;
+          if(t<1)return c/2*t*t+b;
+          t--;
+          return-c/2*(t*(t-2)-1)+b;
+        };
+        requestAnimationFrame(animation)
+      };
+      const supportServer=()=>window.location.href="https://discord.gg/yvpqqb9mdn";
+      const inviteBot=()=>window.location.href="https://discord.com/api/oauth2/authorize?client_id=878580419736506388&permissions=388161&redirect_uri=http%3A%2F%2F127.0.0.1%3A5500&scope=bot";
+      const scrollToAbout=()=>smoothScroll("about",1e3);
+      const scrollToGames=()=>smoothScroll("games",1e3);
+      const scrollToVote=()=>smoothScroll("vote",1e3);
+    </script>
+    <div class="navbar">
+      <a class="name"href="/">Tiny Games</a>
+      <div class="selector">
+        <a onclick="scrollToAbout()">About</a>
+        <a onclick="scrollToGames()">Games</a>
+        <a onclick="scrollToVote()">Vote</a>
+        <button onclick="supportServer()">Support server</button>
+        <button onclick="inviteBot()">Invite</button>
+      </div>
+    </div>
+    <div class="head">
+      <div class="text">
+        <img src="https://cdn.discordapp.com/avatars/878580419736506388/4aa206ba59377b380bb3f9fd24bb5909.png?size=2048">
+        <h1>Tiny Games</h1>
+        <p>A minigame discord bot</p>
+      </div>
+    </div>
+    <div class="content">
+      <div id="about"class="category">
+        <h1 class="cat-title">About</h1>
+        <p>Tiny Games is a mini games bot that will be perfect in your discord server!</p>
+        <p>This bot have many original features and a lot of minigames to play with friends.</p>
+        <p>You can find tiny games on <a href="https://top.gg/bot/878580419736506388">Top.gg</a> and on <a href="https://discordbotlist.com/bots/tiny-games">DiscordBotList</a>.</p>
+        <br>
+        <h2>• Economy system •</h2>
+        <p>You can use the Economy system by doing the commands <span class="bold">PROFILE</span>, <span class="bold">BUY</span> or <span class="bold">BACKGROUNDS</span></p><br>
+        <h2>• Leveling system •</h2>
+        <p>The leveling system is used to do the achievements or to get more tokens (economy)<br>The most useful commands in this category are <span class="bold">PROFILE</span> and <span class="bold">ACHIEVEMENTS</span></p><br>
+        <h2>• Cosmetics system •</h2>
+        <p>You can buy some items into the shop or the pet shop (according to the economy system)<br>The most useful commands in this category are <span class="bold">PROFILE</span>, <span class="bold">BUY</span> and <span class="bold">SHOP</span></p><br>
+        <h2>• Statictics system •</h2>
+        <p>There is also a statistics system to know at what level you are.<br>Use the command <span class="bold">LEADERBOARD</span> to know your placement in the server or the world.<br>You can also do the command <span class="bold">STATISTICS</span> to see your global statiscics</p><br>
+      </div>
+      <div id="games"class="category">
+        <h1 class="cat-title">Games</h1>
+        <table class="commands">
+          <tr>
+            <th>Game</th>
+            <th>Aliases</th>
+            <th>Rules</th> 
+            <th>Cooldown</th>
+          </tr>
+          <tr>
+            <td>3 Colors</td>
+            <td>3c</td>
+            <td>You have to connect 3 colors to destroy them, if you reach the score of 15, you win the game but if you reach the height limit, you lose!</td>
+            <td>15s</td>
+          </tr>
+          <tr>
+            <td>Blackjack</td>
+            <td>bj</td>
+            <td>If a player's first two cards are an ace and a "ten-card" (a picture card or 10), giving a count of 21 in two cards, this is a natural or "blackjack." If any player has a natural and the dealer does not, the dealer immediately pays that player one and a half times the amount of their bet.</td>
+            <td>15s</td>
+          </tr>
+          <tr>
+            <td>Connect 4</td>
+            <td>c4, fourinarow, fiar</td>
+            <td>First, decide who goes first and what color each player will have. Players must alternate turns, and only one disc can be dropped in each turn. On your turn, drop one of your colored discs from the top into any of the seven slots. The game ends when there is a 4-in-a-row or a stalemate. The starter of the previous game goes second on the next game.</td>
+            <td>15s</td>
+          </tr>
+          <tr>
+            <td>Flood</td>
+            <td>- -</td>
+            <td>Click on the colors, all similar colors will change, if the board becomes a solid color before the 24 turns you have won the game!</td>
+            <td>15s</td>
+          </tr>
+          <tr>
+            <td>Guess the number</td>
+            <td>gtn</td>
+            <td>You have to guess the correct number thanks to the plus or minus, you have to find the correct number to win the game.</td>
+            <td>15s</td>
+          </tr>
+          <tr>
+            <td>Hangman</td>
+            <td>hm</td>
+            <td>Hangman is a quick and easy game for at least two people that requires nothing more than paper, a pencil, and the ability to spell. One player, the "host" makes up a secret word, while the other player tries to guess the word by asking what letters it contains. However, every wrong guess brings them one step closer to losing.</td>
+            <td>15s</td>
+          </tr>
+          <tr>
+            <td>Heads or tails</td>
+            <td>hot, ht, flipcoin, flc</td>
+            <td>To flip a coin for such an effect, the player flips the coin and calls “heads” or “tails.” If the call matches the result, the player wins the flip. Otherwise, the player loses the flip. Only the player who flips the coin wins or loses the flip; no other players are involved.</td>
+            <td>15s</td>
+          </tr>
+          <tr>
+            <td>Human calculator</td>
+            <td>fastcalculation, hc, fc</td>
+            <td>I ask you a calculation, you have to answer the correct answer at first to win the game, if you type an incorrect answer, you have to try again.</td>
+            <td>5s</td>
+          </tr>
+          <tr>
+            <td>Marbles</td>
+            <td>- -</td>
+            <td>Everyone have 10 marbles at the begining of the game, you have to bet a number of marbles ans your opponent have to guess if you bet a pair or an odd number of marbles, if he is correct, he have to pick the number of marbles you bet, if he is incorrect, you have to pick the number of marbles you bet.</td>
+            <td>15s</td>
+          </tr>
+          <tr>
+            <td>Mastermind</td>
+            <td>codemaster, codebreaker, colorcodes, cc</td>
+            <td>That player must lift the Secrecy screen at the end of the unit and insert four Code pegs (their secret code) into the holes underneath. Once the code is set, the Decoder can begin guessing, trying to duplicate the exact colors and positions of the hidden Code pegs. Each guess is made by placing a row of Code pegs on the unit.</td>
+            <td>15s</td>
+          </tr>
+          <tr>
+            <td>Memory</td>
+            <td>memo</td>
+            <td>The rules are simple, the person with the most cards at the end of the game wins, if you play alone, you must finish the game before the time limit. The player must turn over two cards, if they match, he can play again, otherwise it's the other player's turn.</td>
+            <td>15s</td>
+          </tr>
+          <tr>
+            <td>Minesweeper</td>
+            <td>ms, mines, miner</td>
+            <td>The numbers on the board represent how many bombs are adjacent to a square. For example, if a square has a \"3\" on it, then there are 3 bombs next to that square. The bombs could be above, below, right left, or diagonal to the square. Avoid all the bombs and expose all the empty spaces to win Minesweeper.</td>
+            <td>15s</td>
+          </tr>
+          <tr>
+            <td>Murder mystery</td>
+            <td>murder, mm, detective, assassin, murderer</td>
+            <td>The goal is to find out who the killer is before he kills everyone. To do this, a detective can inspect the players to determine who the killer is.</td>
+            <td>15s</td>
+          </tr>
+          <tr>
+            <td>Nonogram</td>
+            <td>nng, hanjie, picross, griddlers, paintbynumbers, edel</td>
+            <td>Nonograms are picture logic puzzles in which cells in a grid must be colored or left blank according to numbers at the side of the grid to reveal a hidden picture. For example, a clue of \"4 8 3\" would mean there are sets of four, eight, and three filled squares, in that order, with at least one blank square between successive groups.</td>
+            <td>15s</td>
+          </tr>
+          <tr>
+            <td>Pass the bomb</td>
+            <td>pdb</td>
+            <td>Someone throws a bomb at you that is about to explode, so you decide to throw it at the nearest person to get rid of the bomb!</td>
+            <td>15s</td>
+          </tr>
+          <tr>
+            <td>Quiz</td>
+            <td>trivia</td>
+            <td>Several questions will be asked, the player with the most score wins the game. Please note that the time it takes to answer the questions also counts in the calculation of the score. The fastest to answer the right question will be the winner. If you play alone, you need to have a higher score than 3000.</td>
+            <td>15s</td>
+          </tr>
+          <tr>
+            <td>Rock paper scissors</td>
+            <td>rps, rock, paper, scissors, chifoumi, cfm</td>
+            <td>The game is played where players deliver hand signals that will represent the elements of the game; rock, paper and scissors. The outcome of the game is determined by 3 simple rules: Rock wins against scissors. Scissors win against paper. Paper wins against rock.</td>
+            <td>15s</td>
+          </tr>
+          <tr>
+            <td>Russian roulette</td>
+            <td>rr</td>
+            <td>There is only one bullet in the six-shooter, the one who takes the bullet has lost!</td>
+            <td>15s</td>
+          </tr>
+          <tr>
+            <td>Scramble</td>
+            <td>unscramble, unscrambler, uscr, us</td>
+            <td>Unscramble the letters of a random word chosen by another player, if you find the correct word, you win the game, but if you don't the player who chosen the word win the game.</td>
+            <td>15s</td>
+          </tr>
+          <tr>
+            <td>Shot on goal</td>
+            <td>sog, soccer</td>
+            <td>Shoot at the right place, if the goalkeeper is there, you have lost, if the goalkeeper is not there you have won!</td>
+            <td>15s</td>
+          </tr>
+          <tr>
+            <td>Sticks</td>
+            <td>removesticks, stick, rs</td>
+            <td>You must remove one to three sticks from the board each turn, if you remove the last stick, you have lost the game!</td>
+            <td>15s</td>
+          </tr>
+          <tr>
+            <td>Tic tac toe</td>
+            <td>ttt</td>
+            <td>The game is played on a grid that's 3 squares by 3 squares. You are X, your friend is O. Players take turns putting their marks in empty squares. The first player to get 3 of her marks in a row (up, down, across, or diagonally) is the winner. When all 9 squares are full, the game is over.</td>
+            <td>15s</td>
+          </tr>
+        </table>
+      </div>
+      <div id="vote"class="category">
+        <h1 class="cat-title">Vote</h1>
+        <h2>You can vote on the following websites:</h2>
+        <p><a href="https://top.gg/bot/878580419736506388/vote">Top.gg</a> • <a href="https://discordbotlist.com/bots/tiny-games/vote">DiscordBotList</a></p>
+      </div>
+    </div>
+  </body>
+</html>
